@@ -4,7 +4,7 @@
     <CalcComp /> -->
     <header>
       <div class="header">
-        <h1>Мои линые расходы:</h1>
+        <h1>Мои личные расходы:</h1>
       </div>
     </header>
     <main class="main">

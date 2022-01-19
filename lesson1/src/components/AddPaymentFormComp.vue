@@ -2,9 +2,23 @@
   <div class="wrap">
     <div class="payment__add">
       <input placeholder="Date" v-model="date">
-      <input placeholder="Category" v-model="category">
-      <input placeholder="Value" v-model.number="value">
-      <button class="button" @click="addPayment">Save!</button>
+        <select v-model="category">
+          <option value="" selected disabled>Select category</option>
+          <option
+            v-for="category of categoryList"
+            :key="category"
+            :value="category">
+            {{ category }}
+          </option>
+        </select>
+      <input
+        placeholder="Value"
+        v-model.number="value">
+      <button
+        class="button"
+        @click="addPayment">
+        Save Cost
+      </button>
     </div>
   </div>
 </template>
@@ -12,7 +26,18 @@
 <script>
 export default {
   name: 'AddPaymentFormComp',
+  props: {
+    categoryList: {
+      type: Array,
+      default: () => [],
+    },
+    items: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data: () => ({
+    id: '',
     date: '',
     category: '',
     value: '',
@@ -20,12 +45,13 @@ export default {
   methods: {
     addPayment() {
       const {
-        date, category, value, paymentDay,
+        date, category, value, paymentDay, getId,
       } = this;
       const data = {
+        id: getId,
         date: date || paymentDay,
         category,
-        value,
+        value: +value,
       };
       this.$emit('add-payment', data);
       this.value = '';
@@ -41,6 +67,9 @@ export default {
       const year = currentDate.getFullYear();
 
       return `${day}.${month}.${year}`;
+    },
+    getId() {
+      return this.items.length + 1;
     },
   },
 };
@@ -59,13 +88,16 @@ export default {
   border-radius: 15px;
   background-color: #fff;
   color: #000;
+  width: 200px;
 
   display: flex;
   flex-direction: column;
   & input {
     margin: 10px 0;
     height: 26px;
-    width: 200px;
+  }
+  & select {
+    height: 32px;
   }
 }
 </style>

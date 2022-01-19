@@ -11,10 +11,10 @@
       class="payments__item"
       v-for="(item, index) in paginatedData"
       :key="index">
-      <p>{{ index + 1 }}</p>
+      <p>{{ item.id }}</p>
       <p>{{ item.date }}</p>
       <p>{{ item.category }}</p>
-      <p>{{ item.value }}</p>
+      <p>{{ item.value }} $</p>
     </div>
     <hr>
     <div class="pagination">
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-// document.querySelector('pag').classList.add('active');
 
 export default {
   name: 'PaymentsDisplayComp',
@@ -55,12 +54,11 @@ export default {
     size: {
       type: Number,
       required: false,
-      default: 4,
+      default: 5,
     },
   },
   data: () => ({
     pageNumber: 0,
-    pagData: [],
   }),
   methods: {
     nextPage() {
@@ -75,12 +73,9 @@ export default {
       });
     },
     giveClassActive() {
-      const listPage = document.querySelectorAll('.pag');
-      listPage.forEach((item) => {
-        if (Number(item.innerHTML) === 1) {
-          item.classList.add('active');
-        }
-      });
+      setTimeout(() => {
+        document.querySelector('.pag').classList.add('active');
+      }, 1500);
     },
     prevPage() {
       this.pageNumber -= 1;

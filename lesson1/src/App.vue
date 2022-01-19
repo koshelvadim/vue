@@ -4,26 +4,38 @@
     <CalcComp /> -->
     <header>
       <div class="header">
-        <h1>Мои линые расходы:</h1>
+        <h1>Мои личные расходы:</h1>
+        <h3>Итого: {{ paymentsListTotalAmount }} $</h3>
+        <h3>Всего статей расхода: {{ paymentsListTotalQuantity }} шт.</h3>
+        <h3>Всего категорий: {{ categoryListTotalAmount }} шт.</h3>
       </div>
     </header>
     <main class="main">
       <my-button-comp
-        @click-add="shower"/>
+        @click-add-cost="showCost"
+        @click-add-category="showCategory"/>
       <payments-display-comp :items="paymentsList"/>
       <add-payment-form-comp
-        v-show="visible"
-        @add-payment="addPayment"/>
+        v-show="visibleAddCost"
+        @add-payment="addPayment"
+        :categoryList="categoryList"
+        :items="paymentsList"/>
+      <add-category-comp
+        v-show="visibleAddCategory"
+        :categoryList="categoryList"
+        @add-category="addCategory" />
     </main>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapActions, mapGetters } from 'vuex';
 // import HelloWorld from '@/components/HelloWorld.vue';
 // import CalcComp from '@/components/CalcComp.vue';
 import PaymentsDisplayComp from '@/components/PaymentsDisplayComp.vue';
 import AddPaymentFormComp from '@/components/AddPaymentFormComp.vue';
 import MyButtonComp from '@/components/MyButtonComp.vue';
+import AddCategoryComp from '@/components/AddCategoryComp.vue';
 
 export default {
   name: 'App',
@@ -35,98 +47,69 @@ export default {
     PaymentsDisplayComp,
     AddPaymentFormComp,
     MyButtonComp,
+    AddCategoryComp,
   },
   data: () => ({
-    paymentsList: [],
-    // paginatedData: [],
-    visible: false,
+    visibleAddCost: false,
+    visibleAddCategory: false,
   }),
   methods: {
-    fetchData() {
-      return [
-        {
-          date: '08.01.2022',
-          category: 'Sale',
-          value: 169,
-        },
-        {
-          date: '10.01.2022',
-          category: 'Transport',
-          value: 360,
-        },
-        {
-          date: '14.01.2022',
-          category: 'Food',
-          value: 532,
-        },
-        {
-          date: '16.01.2022',
-          category: 'Music',
-          value: 189,
-        },
-        {
-          date: '18.01.2022',
-          category: 'Airbuss',
-          value: 760,
-        },
-        {
-          date: '20.01.2022',
-          category: 'Restaurant',
-          value: 332,
-        },
-        {
-          date: '08.01.2022',
-          category: 'Sale',
-          value: 169,
-        },
-        {
-          date: '10.01.2022',
-          category: 'Transport',
-          value: 360,
-        },
-        {
-          date: '14.01.2022',
-          category: 'Drive',
-          value: 532,
-        },
-        {
-          date: '16.01.2022',
-          category: 'Music',
-          value: 189,
-        },
-        {
-          date: '18.01.2022',
-          category: 'Airbuss',
-          value: 760,
-        },
-        {
-          date: '20.01.2022',
-          category: 'Restaurant',
-          value: 332,
-        },
-      ];
-    },
+    ...mapMutations([
+      'ADD_PAYMETN_DATA',
+      'ADD_CATEGORY_DATA',
+    ]),
+    ...mapActions([
+      'fetchData',
+      'fetchCategoryList',
+    ]),
+
     addPayment(data) {
       console.log(data);
-      this.paymentsList.push(data);
-      this.visible = false;
-      const getBody = document.body;
-      getBody.classList.remove('active_modal');
+      this.ADD_PAYMETN_DATA(data);
+      this.visibleAddCost = false;
+      document.body.classList.remove('active_modal');
     },
-    shower() {
-      this.visible = !this.visible;
-      const getBody = document.body;
-      if (this.visible) {
-        getBody.classList.add('active_modal');
+    addCategory(data) {
+      console.log(data);
+      this.ADD_CATEGORY_DATA(data);
+      this.visibleAddCategory = false;
+      document.body.classList.remove('active_modal');
+    },
+    showCost() {
+      this.visibleAddCategory = false;
+      this.visibleAddCost = !this.visibleAddCost;
+      if (this.visibleAddCost) {
+        document.body.classList.add('active_modal');
       } else {
-        getBody.classList.remove('active_modal');
+        document.body.classList.remove('active_modal');
+      }
+    },
+    showCategory() {
+      this.visibleAddCost = false;
+      this.visibleAddCategory = !this.visibleAddCategory;
+      if (this.visibleAddCategory) {
+        document.body.classList.add('active_modal');
+      } else {
+        document.body.classList.remove('active_modal');
       }
     },
   },
+  computed: {
+    ...mapGetters([
+      'paymentsList',
+      'paymentsListTotalAmount',
+      'paymentsListTotalQuantity',
+      'categoryList',
+      'categoryListTotalAmount',
+    ]),
+  },
   created() {
-    this.paymentsList = this.fetchData();
+    console.log(this.$store);
+    this.fetchData();
+    this.fetchCategoryList();
   },
 };
+
 </script>
 
 <style lang="scss">
@@ -136,7 +119,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 .header {
   text-align: start;

@@ -1,6 +1,7 @@
 export default {
   state: {
     paymentsList: [],
+    size: 5,
   },
   mutations: {
     SET_PAYMENTS_LIST(state, paymentsList) {
@@ -9,12 +10,16 @@ export default {
     ADD_PAYMETN_DATA(state, payment) {
       state.paymentsList.push(payment);
     },
+    CHANGE_INPUT_VALUE(state, data) {
+      state.size = data;
+    },
   },
   getters: {
     paymentsList: (state) => state.paymentsList,
     paymentsListTotalAmount: ({ paymentsList }) => paymentsList
       .reduce((total, { value }) => total + value, 0),
     paymentsListTotalQuantity: ({ paymentsList }) => paymentsList.length,
+    changeInputValue: (state) => state.size,
   },
   actions: {
     fetchData({ commit }) {

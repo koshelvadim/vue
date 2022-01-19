@@ -13,8 +13,11 @@
     <main class="main">
       <my-button-comp
         @click-add-cost="showCost"
-        @click-add-category="showCategory"/>
-      <payments-display-comp :items="paymentsList"/>
+        @click-add-category="showCategory"
+        @change-size="changeSize"/>
+      <payments-display-comp
+        :items="paymentsList"
+        :size="$store.getters.changeInputValue"/>
       <add-payment-form-comp
         v-show="visibleAddCost"
         @add-payment="addPayment"
@@ -23,7 +26,7 @@
       <add-category-comp
         v-show="visibleAddCategory"
         :categoryList="categoryList"
-        @add-category="addCategory" />
+        @add-category="addCategory"/>
     </main>
   </div>
 </template>
@@ -57,6 +60,7 @@ export default {
     ...mapMutations([
       'ADD_PAYMETN_DATA',
       'ADD_CATEGORY_DATA',
+      'CHANGE_INPUT_VALUE',
     ]),
     ...mapActions([
       'fetchData',
@@ -74,6 +78,10 @@ export default {
       this.ADD_CATEGORY_DATA(data);
       this.visibleAddCategory = false;
       document.body.classList.remove('active_modal');
+    },
+    changeSize(data) {
+      console.log(data);
+      this.CHANGE_INPUT_VALUE(data);
     },
     showCost() {
       this.visibleAddCategory = false;
@@ -99,6 +107,7 @@ export default {
       'paymentsList',
       'paymentsListTotalAmount',
       'paymentsListTotalQuantity',
+      'changeInputValue',
       'categoryList',
       'categoryListTotalAmount',
     ]),

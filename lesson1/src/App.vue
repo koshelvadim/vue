@@ -9,32 +9,6 @@
     </nav>
 
     <router-view />
-    <!-- <header>
-      <div class="header">
-        <h1>Мои личные расходы:</h1>
-        <h3>Итого: {{ paymentsListTotalAmount }} $</h3>
-        <h3>Всего статей расхода: {{ paymentsListTotalQuantity }} шт.</h3>
-        <h3>Всего категорий: {{ categoryListTotalAmount }} шт.</h3>
-      </div>
-    </header> -->
-    <!-- <main class="main">
-      <my-button-comp
-        @click-add-cost="showCost"
-        @click-add-category="showCategory"
-        @change-size="changeSize"/>
-      <payments-display-comp
-        :items="paymentsList"
-        :size="$store.getters.changeInputValue"/>
-      <add-payment-form-comp
-        v-show="visibleAddCost"
-        @add-payment="addPayment"
-        :categoryList="categoryList"
-        :items="paymentsList"/>
-      <add-category-comp
-        v-show="visibleAddCategory"
-        :categoryList="categoryList"
-        @add-category="addCategory"/>
-    </main> -->
   </div>
 </template>
 

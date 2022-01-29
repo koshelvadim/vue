@@ -10,8 +10,8 @@ export default {
     ADD_PAYMETN_DATA(state, payment) {
       state.paymentsList.push(payment);
     },
-    CHANGE_INPUT_VALUE(state, data) {
-      state.size = data;
+    CHANGE_INPUT_VALUE(state, value) {
+      state.size = value;
     },
   },
   getters: {
@@ -19,7 +19,7 @@ export default {
     paymentsListTotalAmount: ({ paymentsList }) => paymentsList
       .reduce((total, { value }) => total + value, 0),
     paymentsListTotalQuantity: ({ paymentsList }) => paymentsList.length,
-    changeInputValue: (state) => state.size,
+    size: (state) => state.size,
   },
   actions: {
     fetchData({ commit }) {

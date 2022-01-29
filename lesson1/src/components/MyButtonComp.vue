@@ -20,7 +20,7 @@
         max="8"
         value="5"
         v-model.number="value"
-        @change="changeSize">
+        @change="$emit('change-size', value)">
     </div>
   </div>
 </template>
@@ -32,10 +32,6 @@ export default {
     value: 5,
   }),
   methods: {
-    changeSize() {
-      const data = this.value;
-      this.$emit('change-size', data);
-    },
   },
 };
 </script>
@@ -62,7 +58,7 @@ export default {
 
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &__add{
       color: black;
   }

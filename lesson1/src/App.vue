@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld msg="Welcome to Vue.js"/>
-    <CalcComp /> -->
     <nav>
       <router-link to="dashboard">Dashboard</router-link>
       <router-link to="about">About</router-link>
       <router-link to="notfound">Not Found</router-link>
+      <router-link to="calc">Calculator</router-link>
     </nav>
-
     <router-view />
   </div>
 </template>
@@ -16,7 +14,6 @@
 
 export default {
   name: 'App',
-  // components: { DashboardPage, AboutPage, NotfoundPage },
   data: () => ({}),
 };
 
@@ -35,9 +32,10 @@ nav {
   padding: 20px;
   a {
     padding: 10px;
-    font-size: 26px;
-    margin: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
     text-decoration: none;
+    color: blue;
     transition: all .3s ease-in-out;
     &:hover {
       background-color: #eee;

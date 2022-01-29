@@ -43,20 +43,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'PaymentsDisplayComp',
-  props: {
-    items: {
-      type: Array,
-      required: true,
-    },
-    size: {
-      type: Number,
-      required: false,
-      default: 5,
-    },
-  },
   data: () => ({
     pageNumber: 0,
   }),
@@ -90,15 +80,17 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['paymentsList', 'size']),
+
     pageCount() {
-      const l = this.items.length;
+      const l = this.paymentsList.length;
       const s = this.size;
       return Math.ceil(l / s);
     },
     paginatedData() {
       const start = this.pageNumber * this.size;
       const end = start + this.size;
-      return this.items.slice(start, end);
+      return this.paymentsList.slice(start, end);
     },
   },
   mounted() {

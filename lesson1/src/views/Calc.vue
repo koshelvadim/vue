@@ -28,10 +28,6 @@
         :key="operator">{{operator}}
       </button>
     </div>
-    <!-- <div class="fib">
-      fibonacci-1 = {{ fib1 }} <br/>
-      fibonacci-2 = {{ fib2 }}
-    </div> -->
     <div class="checkbox">
       <input type="checkbox" id="show" v-model="show">
       <label for="show">Показать клавиатуру</label>
@@ -110,9 +106,6 @@ export default {
         default: console.log('нет таких значений');
       }
     },
-    // fib(n) {
-    //   return n <= 1 ? n : this.fib(n - 1) + this.fib(n - 2);
-    // },
     getValue(button, check) {
       if (check === 'one') {
         if (this.op1 === 0) {
@@ -147,21 +140,13 @@ export default {
     },
   },
   computed: {
-    // fib1() {
-    //   const { op1 } = this;
-    //   return this.fib(op1);
-    // },
-    // fib2() {
-    //   const { op2 } = this;
-    //   return this.fib(op2);
-    // },
   },
 };
 </script>
 
 <style scoped lang="scss">
 h1 {
-  color: orangered;
+  color: black;
 }
 .num {
   display: flex;

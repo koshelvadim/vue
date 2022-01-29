@@ -1,6 +1,11 @@
 <template>
- <div class="wrap">
-    <div class="payment__add">
+  <div class="wrapper">
+    <div class="modal-window">
+      <button
+        class="close"
+        @click="$emit('close-modal-category')">
+        x
+      </button>
       <input
         placeholder="New category"
         v-model="newCategory">
@@ -14,50 +19,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'AddCategoryComp',
-  props: {
-    categoryList: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data: () => ({
     newCategory: '',
   }),
   methods: {
     addCategory() {
       const data = this.newCategory;
-      this.$emit('add-category', data);
-      this.newCategory = '';
+      if (data && data !== ' ') {
+        this.$emit('add-category', data);
+        this.newCategory = '';
+      }
     },
+  },
+  computed: {
+    ...mapGetters(['categoryList']),
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-}
-.payment__add {
-  padding: 20px;
-  border-radius: 15px;
-  background-color: #fff;
-  color: #000;
-  width: 200px;
-
-  display: flex;
-  flex-direction: column;
-  & input {
-    margin: 10px 0;
-    height: 26px;
-  }
-  & select {
-    height: 32px;
-  }
-}
+<style lang="scss">
 </style>

@@ -1,25 +1,18 @@
 <template>
-  <div class="wrapper">
-    <div class="modal-window">
-      <button
-        class="close"
-        @click="$emit('close-modal-category')">
-        x
-      </button>
-      <input
-        placeholder="New category"
-        v-model="newCategory">
-      <button
-        class="button"
-        @click="addCategory">
-        Save Category
-      </button>
-    </div>
+  <div>
+    <input
+      placeholder="New category"
+      v-model="newCategory">
+    <button
+      class="button"
+      @click="addCategory">
+      Save Category
+    </button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'AddCategoryComp',
@@ -27,11 +20,14 @@ export default {
     newCategory: '',
   }),
   methods: {
+    ...mapMutations(['ADD_CATEGORY_DATA']),
+
     addCategory() {
       const data = this.newCategory;
       if (data && data !== ' ') {
-        this.$emit('add-category', data);
+        this.ADD_CATEGORY_DATA(data);
         this.newCategory = '';
+        this.$modal.hide();
       }
     },
   },

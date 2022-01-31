@@ -7,14 +7,38 @@
       <router-link to="calc">Calculator</router-link>
     </nav>
     <router-view />
+    <transition name="fade">
+      <modal-window-comp
+      v-if="showModal"
+      :settings="modalSettings"/>
+    </transition>
   </div>
 </template>
 
 <script>
+import ModalWindowComp from '@/components/ModalWindowComp.vue';
 
 export default {
+  components: { ModalWindowComp },
   name: 'App',
-  data: () => ({}),
+  data: () => ({
+    showModal: false,
+    modalSettings: {},
+  }),
+  methods: {
+    modalOpen(settings) {
+      this.modalSettings = settings;
+      this.showModal = true;
+    },
+    modalClose() {
+      this.showModal = false;
+      this.modalSettings = {};
+    },
+  },
+  mounted() {
+    this.$modal.EventBus.$on('show', this.modalOpen);
+    this.$modal.EventBus.$on('hide', this.modalClose);
+  },
 };
 
 </script>
@@ -27,6 +51,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 nav {
   padding: 20px;

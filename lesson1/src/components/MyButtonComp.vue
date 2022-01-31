@@ -3,7 +3,7 @@
     <div class="my_button">
       <button
         class="button button__add"
-        @click="$emit('click-add-cost')">
+        @click="$emit('click-add-payment')">
         Add new cost +
       </button>
       <button
@@ -32,6 +32,9 @@ export default {
     value: 5,
   }),
   methods: {
+    // addPayment() {
+    //   this.$modal.show({});
+    // },
   },
 };
 </script>

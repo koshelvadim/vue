@@ -73,34 +73,10 @@ export default {
             category: 'Transport',
             value: 360,
           },
-          {
-            id: '9',
-            date: '14.01.2022',
-            category: 'Drive',
-            value: 532,
-          },
-          {
-            id: '10',
-            date: '16.01.2022',
-            category: 'Music',
-            value: 189,
-          },
-          {
-            id: '11',
-            date: '18.01.2022',
-            category: 'Airbuss',
-            value: 760,
-          },
-          {
-            id: '12',
-            date: '20.01.2022',
-            category: 'Restaurant',
-            value: 332,
-          },
         ];
 
         commit('SET_PAYMENTS_LIST', paymentsList);
-      }, 1000);
+      }, 500);
     },
   },
 };

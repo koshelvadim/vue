@@ -10,22 +10,11 @@
     </header>
     <main class="main">
       <my-button-comp
-        @click-add-cost="showCost"
-        @click-add-category="showCategory"
+        @click-add-payment="addPayment"
+        @click-add-category="addCategory"
         @change-size="changeSize"/>
       <payments-display-comp
         :paymentsList="paymentsList"/>
-      <add-payment-form-comp
-        v-show="visibleAddCost"
-        @add-payment="addPayment"
-        @close-modal-payment="closeModalPayment"
-        :categoryList="categoryList"
-        :paymentList="paymentsList"/>
-      <add-category-comp
-        v-show="visibleAddCategory"
-        :categoryList="categoryList"
-        @add-category="addCategory"
-        @close-modal-category="closeModalCategory"/>
     </main>
   </div>
 </template>
@@ -34,22 +23,15 @@
 import { mapMutations, mapActions, mapGetters } from 'vuex';
 
 import PaymentsDisplayComp from '@/components/PaymentsDisplayComp.vue';
-import AddPaymentFormComp from '@/components/AddPaymentFormComp.vue';
 import MyButtonComp from '@/components/MyButtonComp.vue';
-import AddCategoryComp from '@/components/AddCategoryComp.vue';
 
 export default {
   name: 'DashboardPage',
   components: {
     PaymentsDisplayComp,
-    AddPaymentFormComp,
     MyButtonComp,
-    AddCategoryComp,
   },
-  data: () => ({
-    visibleAddCost: false,
-    visibleAddCategory: false,
-  }),
+  data: () => ({}),
   methods: {
     ...mapMutations([
       'ADD_PAYMETN_DATA',
@@ -61,30 +43,20 @@ export default {
       'fetchCategoryList',
     ]),
 
-    addPayment(data) {
-      this.ADD_PAYMETN_DATA(data);
-      this.visibleAddCost = false;
+    addPayment() {
+      this.$modal.show({
+        title: 'Add new payment',
+        content: 'addPaymentFormComp',
+      });
     },
-    addCategory(data) {
-      this.ADD_CATEGORY_DATA(data);
-      this.visibleAddCategory = false;
-    },
-    closeModalPayment() {
-      this.visibleAddCost = false;
-    },
-    closeModalCategory() {
-      this.visibleAddCategory = false;
+    addCategory() {
+      this.$modal.show({
+        title: 'Add new category',
+        content: 'addCategoryComp',
+      });
     },
     changeSize(value) {
       this.CHANGE_INPUT_VALUE(value);
-    },
-    showCost() {
-      this.visibleAddCategory = false;
-      this.visibleAddCost = !this.visibleAddCost;
-    },
-    showCategory() {
-      this.visibleAddCost = false;
-      this.visibleAddCategory = !this.visibleAddCategory;
     },
   },
   computed: {
@@ -96,10 +68,12 @@ export default {
       'categoryListTotalAmount',
     ]),
   },
-  created() {
+  mounted() {
     console.log(this.$store);
     this.fetchData();
     this.fetchCategoryList();
+    this.$modal.show({});
+    this.$modal.hide();
   },
 };
 </script>

@@ -15,8 +15,8 @@
       v-model.number="value">
     <button
       class="button"
-      @click="addPayment">
-      Save Cost
+      @click="saveEdit">
+      Save Edit
     </button>
   </div>
 </template>
@@ -25,7 +25,15 @@
 import { mapMutations, mapGetters } from 'vuex';
 
 export default {
-  name: 'AddPaymentFormComp',
+  name: 'EditPaymentComp',
+  props: {
+    settings: {
+      type: Object,
+      default: () => ({
+        date: 'settings.data.date',
+      }),
+    },
+  },
   data: () => ({
     id: '',
     date: '',
@@ -33,20 +41,20 @@ export default {
     value: '',
   }),
   methods: {
-    ...mapMutations(['ADD_PAYMETN_DATA']),
+    ...mapMutations(['EDIT_PAYMENT_DATA']),
 
-    addPayment() {
+    saveEdit() {
       const {
-        date, category, value, paymentDay, getId,
+        date, category, value, id,
       } = this;
       const data = {
-        id: getId,
-        date: date || paymentDay,
+        id,
+        date,
         category,
         value: +value,
       };
-      if (data.value && data.category) {
-        this.ADD_PAYMETN_DATA(data);
+      if (data.value && data.category && data.date) {
+        this.EDIT_PAYMENT_DATA(data);
         this.value = '';
         this.category = '';
         this.data = '';
@@ -55,24 +63,17 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
-      'paymentsList',
-      'categoryList',
-    ]),
-    paymentDay() {
-      const currentDate = new Date();
-      const day = currentDate.getDate();
-      const month = currentDate.getMonth() + 1;
-      const year = currentDate.getFullYear();
-
-      return `${day}.${month}.${year}`;
-    },
-    getId() {
-      return this.paymentsList.length + 1;
-    },
+    ...mapGetters(['categoryList']),
+  },
+  mounted() {
+    this.value = this.settings.data.value;
+    this.id = this.settings.data.id;
+    this.date = this.settings.data.date;
+    this.category = this.settings.data.category;
   },
 };
 </script>
 
-<style lang="scss">
+<style>
+
 </style>

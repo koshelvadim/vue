@@ -12,5 +12,12 @@ export default {
         this.EventBus.$emit('hide');
       },
     };
+    // eslint-disable-next-line no-param-reassign
+    Vue.prototype.$contextmenu = {
+      EventBus: new Vue(),
+      trigger(settings) {
+        this.EventBus.$emit('trigger', settings);
+      },
+    };
   },
 };

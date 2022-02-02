@@ -12,18 +12,26 @@
       v-if="showModal"
       :settings="modalSettings"/>
     </transition>
+    <transition name="fade">
+      <context-menu-comp
+        v-if="showContextMenu"
+        :settings="contextMenuSettings"/>
+    </transition>
   </div>
 </template>
 
 <script>
 import ModalWindowComp from '@/components/ModalWindowComp.vue';
+import ContextMenuComp from '@/components/ContextMenuComp.vue';
 
 export default {
-  components: { ModalWindowComp },
+  components: { ModalWindowComp, ContextMenuComp },
   name: 'App',
   data: () => ({
     showModal: false,
+    showContextMenu: false,
     modalSettings: {},
+    contextMenuSettings: {},
   }),
   methods: {
     modalOpen(settings) {
@@ -34,10 +42,20 @@ export default {
       this.showModal = false;
       this.modalSettings = {};
     },
+    contextmenuTrigger(settings) {
+      if (this.showContextMenu) {
+        this.contextMenuSettings = {};
+        this.showContextMenu = false;
+      } else {
+        this.showContextMenu = true;
+        this.contextMenuSettings = settings;
+      }
+    },
   },
   mounted() {
     this.$modal.EventBus.$on('show', this.modalOpen);
     this.$modal.EventBus.$on('hide', this.modalClose);
+    this.$contextmenu.EventBus.$on('trigger', this.contextmenuTrigger);
   },
 };
 

@@ -69,11 +69,12 @@ export default {
     ]),
   },
   mounted() {
-    console.log(this.$store);
+    // console.log(this.$store);
     this.fetchData();
     this.fetchCategoryList();
-    this.$modal.show({});
-    this.$modal.hide();
+    // this.$modal.show({});
+    // this.$modal.hide();
+    // this.$contextmenu.trigger({});
   },
 };
 </script>

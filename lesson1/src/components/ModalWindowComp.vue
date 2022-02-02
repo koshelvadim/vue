@@ -7,7 +7,9 @@
         @click="closeModalWindow">
         x
       </button>
-      <component :is="settings.content"/>
+      <component
+        :is="settings.content"
+        :settings="settings"/>
     </div>
   </div>
 </template>
@@ -15,6 +17,7 @@
 <script>
 import AddPaymentFormComp from '@/components/AddPaymentFormComp.vue';
 import AddCategoryComp from '@/components/AddCategoryComp.vue';
+import EditPaymentComp from '@/components/EditPaymentComp.vue';
 
 export default {
   name: 'ModalWindowComp',
@@ -24,7 +27,7 @@ export default {
       default: () => ({}),
     },
   },
-  components: { AddPaymentFormComp, AddCategoryComp },
+  components: { AddPaymentFormComp, AddCategoryComp, EditPaymentComp },
   methods: {
     closeModalWindow() {
       this.$modal.hide();

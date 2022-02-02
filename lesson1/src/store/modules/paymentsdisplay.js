@@ -13,6 +13,21 @@ export default {
     CHANGE_INPUT_VALUE(state, value) {
       state.size = value;
     },
+    DELETE_PAYMENT_DATA(state, payment) {
+      state.paymentsList.forEach((element, index) => {
+        if (element.id === payment.id) {
+          state.paymentsList.splice(index, 1);
+        }
+      });
+    },
+    EDIT_PAYMENT_DATA(state, payment) {
+      console.log(payment);
+      state.paymentsList.forEach((element, index) => {
+        if (element.id === payment.id) {
+          state.paymentsList.splice(index, 1, payment);
+        }
+      });
+    },
   },
   getters: {
     paymentsList: (state) => state.paymentsList,

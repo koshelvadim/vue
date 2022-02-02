@@ -11,10 +11,15 @@
       class="payments__item"
       v-for="(item, index) in paginatedData"
       :key="index">
-      <p>{{ item.id }}</p>
+      <p>{{ index + 1 }}</p>
       <p>{{ item.date }}</p>
       <p>{{ item.category }}</p>
-      <p>{{ item.value }} $</p>
+      <p>{{ item.value }} $ </p>
+      <span
+        class="context"
+        @click="openContextMenu(item, index)">
+        :
+      </span>
     </div>
     <hr>
     <div class="pagination">
@@ -43,7 +48,9 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex';
+// import ContextMenuComp from '@/components/ContextMenuComp.vue';
 
 export default {
   name: 'PaymentsDisplayComp',
@@ -78,6 +85,11 @@ export default {
         }
       });
     },
+    openContextMenu(item, index) {
+      const payItems = document.querySelectorAll('.payments__item');
+      payItems[index].classList.add('active');
+      this.$contextmenu.trigger(item);
+    },
   },
   computed: {
     ...mapGetters(['paymentsList', 'size']),
@@ -103,7 +115,7 @@ export default {
 <style lang="scss" scoped>
   .payments__title {
     display: grid;
-    grid-template-columns: 50px 100px 100px 100px;
+    grid-template-columns: 50px 100px 100px 100px 10px;
       & p {
         margin: 0;
         font-weight: bold;
@@ -114,10 +126,31 @@ export default {
     padding: 10px;
   }
   .payments__item {
+    position: relative;
     display: grid;
-    grid-template-columns: 50px 100px 100px 100px;
+    grid-template-columns: 50px 100px 100px 100px 10px;
+    & .active {
+      background-color: brown;
+    }
     & p {
       margin: 5px;
+    }
+    .context {
+      padding: 5px;
+      position: relative;
+      margin: 0px;
+      font-weight: bold;
+      &::after {
+        content: '.';
+        position: absolute;
+        top: -8px;
+        left: 5.5px;
+        font-weight: bold;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: #eee;
+      }
     }
   }
   .pagination {

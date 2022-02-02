@@ -28,21 +28,24 @@ export default {
     ...mapMutations([
       'DELETE_PAYMENT_DATA',
       'EDIT_PAYMENT_DATA',
+      'CLEAR_CLASS_ACTIVE',
     ]),
     paymentDelete() {
       const data = this.settings;
       this.DELETE_PAYMENT_DATA(data);
-      this.$contextmenu.trigger();
+      this.$contextmenu.hide();
+      this.CLEAR_CLASS_ACTIVE();
     },
     paymentEdit() {
-      const data = this.settings;
-      this.EDIT_PAYMENT_DATA(data);
-      this.$contextmenu.trigger();
+      this.$contextmenu.hide();
       this.$modal.show({
         title: 'Edit payment',
         content: 'editPaymentComp',
         data: this.settings,
       });
+      const data = this.settings;
+      this.EDIT_PAYMENT_DATA(data);
+      this.CLEAR_CLASS_ACTIVE();
     },
   },
 };

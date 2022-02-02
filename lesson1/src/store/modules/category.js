@@ -26,6 +26,7 @@ export default {
           'Music',
           'Restaurant',
           'Drive',
+          'Airbuss',
         ];
         commit('SET_CATEGORY_LIST', categoryList);
       }, 1000);

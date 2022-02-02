@@ -32,9 +32,6 @@ export default {
     value: 5,
   }),
   methods: {
-    // addPayment() {
-    //   this.$modal.show({});
-    // },
   },
 };
 </script>

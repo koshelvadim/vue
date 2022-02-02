@@ -37,6 +37,7 @@ export default {
       'ADD_PAYMETN_DATA',
       'ADD_CATEGORY_DATA',
       'CHANGE_INPUT_VALUE',
+      'CLEAR_CLASS_ACTIVE',
     ]),
     ...mapActions([
       'fetchData',
@@ -44,12 +45,16 @@ export default {
     ]),
 
     addPayment() {
+      this.CLEAR_CLASS_ACTIVE();
+      this.$contextmenu.hide();
       this.$modal.show({
         title: 'Add new payment',
         content: 'addPaymentFormComp',
       });
     },
     addCategory() {
+      this.CLEAR_CLASS_ACTIVE();
+      this.$contextmenu.hide();
       this.$modal.show({
         title: 'Add new category',
         content: 'addCategoryComp',

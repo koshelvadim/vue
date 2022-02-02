@@ -42,20 +42,21 @@ export default {
       this.showModal = false;
       this.modalSettings = {};
     },
-    contextmenuTrigger(settings) {
-      if (this.showContextMenu) {
-        this.contextMenuSettings = {};
-        this.showContextMenu = false;
-      } else {
-        this.showContextMenu = true;
-        this.contextMenuSettings = settings;
-      }
+    contextmenuOpen(settings) {
+      this.contextMenuSettings = settings;
+      this.showContextMenu = true;
     },
+    contextmenuClose() {
+      this.showContextMenu = false;
+      this.contextMenuSettings = {};
+    },
+
   },
   mounted() {
     this.$modal.EventBus.$on('show', this.modalOpen);
     this.$modal.EventBus.$on('hide', this.modalClose);
-    this.$contextmenu.EventBus.$on('trigger', this.contextmenuTrigger);
+    this.$contextmenu.EventBus.$on('show', this.contextmenuOpen);
+    this.$contextmenu.EventBus.$on('hide', this.contextmenuClose);
   },
 };
 

@@ -28,6 +28,12 @@ export default {
         }
       });
     },
+    CLEAR_CLASS_ACTIVE() {
+      const payItems = document.querySelectorAll('.payments__item');
+      payItems.forEach((el) => {
+        el.classList.remove('active');
+      });
+    },
   },
   getters: {
     paymentsList: (state) => state.paymentsList,

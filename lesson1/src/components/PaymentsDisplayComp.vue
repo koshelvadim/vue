@@ -49,8 +49,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
-// import ContextMenuComp from '@/components/ContextMenuComp.vue';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'PaymentsDisplayComp',
@@ -58,6 +57,7 @@ export default {
     pageNumber: 0,
   }),
   methods: {
+    ...mapMutations(['CLEAR_CLASS_ACTIVE']),
     nextPage() {
       this.pageNumber += 1;
       const listPage = document.querySelectorAll('.pag');
@@ -86,9 +86,10 @@ export default {
       });
     },
     openContextMenu(item, index) {
+      this.CLEAR_CLASS_ACTIVE();
       const payItems = document.querySelectorAll('.payments__item');
       payItems[index].classList.add('active');
-      this.$contextmenu.trigger(item);
+      this.$contextmenu.show(item);
     },
   },
   computed: {
@@ -129,8 +130,8 @@ export default {
     position: relative;
     display: grid;
     grid-template-columns: 50px 100px 100px 100px 10px;
-    & .active {
-      background-color: brown;
+    &.active {
+      color: orangered;
     }
     & p {
       margin: 5px;

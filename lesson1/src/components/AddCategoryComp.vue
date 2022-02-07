@@ -1,14 +1,8 @@
 <template>
-  <div>
-    <input
-      placeholder="New category"
-      v-model="newCategory">
-    <button
-      class="button"
-      @click="addCategory">
-      Save Category
-    </button>
-  </div>
+  <v-card class="text-center pa-8">
+    <v-text-field v-model="newCategory" label="New Category"/>
+    <v-btn @click="addCategory">Add Category</v-btn>
+  </v-card>
 </template>
 
 <script>

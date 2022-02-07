@@ -4,12 +4,13 @@
       app
       color="orange"
       dark
+      width="100%"
     >
-      <div class="d-flex flex-row align-center">
-        <v-btn to="/dashboard" :ripple="true">Dashboard</v-btn>
-        <v-btn to="/about" :ripple="true">About</v-btn>
-        <v-btn to="/notfound" :ripple="true">Not Found</v-btn>
-        <v-btn to="/calc" :ripple="true">Calculator</v-btn>
+      <div class="d-flex flex-row align-center justify-space-between">
+        <v-btn class="mx-1" to="/dashboard" :ripple="true">Dashboard</v-btn>
+        <v-btn class="mx-1" to="/about" :ripple="true">About</v-btn>
+        <v-btn class="mx-1" to="/notfound" :ripple="true">Not Found</v-btn>
+        <v-btn class="mx-1" to="/calc" :ripple="true">Calculator</v-btn>
       </div>
     </v-app-bar>
 

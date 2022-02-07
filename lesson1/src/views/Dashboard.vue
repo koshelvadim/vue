@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col cols=6>
+        <v-col>
           <div class="header">
             <h1>Мои личные расходы:</h1>
             <h3>Итого: {{ paymentsListTotalAmount }} $</h3>
@@ -11,8 +11,7 @@
           </div>
         </v-col>
       </v-row>
-    </v-container>
-    <main class="main">
+      <main class="main">
       <my-button-comp
         @click-add-payment="addPayment"
         @click-add-category="addCategory"
@@ -20,6 +19,7 @@
       <payments-display-comp
         :paymentsList="paymentsList"/>
     </main>
+    </v-container>
   </div>
 </template>
 

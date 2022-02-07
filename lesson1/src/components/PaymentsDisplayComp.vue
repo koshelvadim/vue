@@ -4,44 +4,42 @@
       <v-row>
         <v-col cols=1>№</v-col>
         <v-col cols=4>Date</v-col>
-        <v-col cols=5>Category</v-col>
+        <v-col cols=4>Category</v-col>
         <v-col cols=2>Value</v-col>
+        <v-col cols=1></v-col>
       </v-row>
       <v-row
         v-for="({ date, category, value}, index) in paginatedData"
         :key="index">
         <v-col cols=1>{{ index + 1 }}</v-col>
         <v-col cols=4>{{ date }}</v-col>
-        <v-col cols=5>{{ category }}</v-col>
+        <v-col cols=4>{{ category }}</v-col>
         <v-col cols=2>{{ value }} $ </v-col>
-        <span
-        class="context"
+        <v-col class="context" cols=1
         @click="openContextMenu(item, index)">
         :
-        </span>
+        </v-col>
       </v-row>
     </v-container>
     <hr>
     <div class="pagination">
       <ul>
-        <button
-          class="button"
+        <v-btn
           :disabled="pageNumber === 0"
           @click="prevPage">
           Previous
-        </button>
+        </v-btn>
         <li
           class="pag"
           v-for="(p) in pageCount"
           :key="p">
           {{ p }}
         </li>
-        <button
-          class="button"
+        <v-btn
           :disabled="pageNumber >= pageCount -1"
           @click="nextPage">
           Next
-        </button>
+        </v-btn>
       </ul>
     </div>
   </div>
@@ -134,12 +132,6 @@ export default {
             color: red;
           }
       }
-    }
-    button:hover{
-      cursor:pointer;
-    }
-    button:hover:disabled{
-      cursor:not-allowed;
     }
   }
 </style>

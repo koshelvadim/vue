@@ -1,24 +1,14 @@
 <template>
-  <div>
-    <input placeholder="Date" v-model="date">
-      <select v-model="category">
-        <option value="" selected disabled>Select category</option>
-        <option
-          v-for="category of categoryList"
-          :key="category"
-          :value="category">
-          {{ category }}
-        </option>
-      </select>
-    <input
-      placeholder="Value"
-      v-model.number="value">
-    <button
-      class="button"
-      @click="addPayment">
-      Save Cost
-    </button>
-  </div>
+  <v-card class="text-center pa-8">
+    <v-text-field v-model="date" label="Data"/>
+    <v-select
+      v-model="category"
+      label="Category"
+      :items="categoryList"
+    />
+    <v-text-field v-model="value" label="Value"/>
+    <v-btn @click="addPayment">Add Payment</v-btn>
+  </v-card>
 </template>
 
 <script>
@@ -50,7 +40,6 @@ export default {
         this.value = '';
         this.category = '';
         this.data = '';
-        this.$modal.hide();
       }
     },
   },
@@ -74,5 +63,5 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 </style>

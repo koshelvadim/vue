@@ -1,26 +1,26 @@
 <template>
-  <div class="payments__wrap">
-    <div class="payments__title">
-      <p>№</p>
-      <p>Date</p>
-      <p>Category</p>
-      <p>Value</p>
-    </div>
-    <hr>
-    <div
-      class="payments__item"
-      v-for="(item, index) in paginatedData"
-      :key="index">
-      <p>{{ index + 1 }}</p>
-      <p>{{ item.date }}</p>
-      <p>{{ item.category }}</p>
-      <p>{{ item.value }} $ </p>
-      <span
+  <div>
+    <v-container px-2>
+      <v-row>
+        <v-col cols=1>№</v-col>
+        <v-col cols=4>Date</v-col>
+        <v-col cols=5>Category</v-col>
+        <v-col cols=2>Value</v-col>
+      </v-row>
+      <v-row
+        v-for="({ date, category, value}, index) in paginatedData"
+        :key="index">
+        <v-col cols=1>{{ index + 1 }}</v-col>
+        <v-col cols=4>{{ date }}</v-col>
+        <v-col cols=5>{{ category }}</v-col>
+        <v-col cols=2>{{ value }} $ </v-col>
+        <span
         class="context"
         @click="openContextMenu(item, index)">
         :
-      </span>
-    </div>
+        </span>
+      </v-row>
+    </v-container>
     <hr>
     <div class="pagination">
       <ul>
@@ -114,46 +114,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .payments__title {
-    display: grid;
-    grid-template-columns: 50px 100px 100px 100px 10px;
-      & p {
-        margin: 0;
-        font-weight: bold;
-      }
-  }
-  .payments__wrap {
-    border: 1px solid black;
-    padding: 10px;
-  }
-  .payments__item {
-    position: relative;
-    display: grid;
-    grid-template-columns: 50px 100px 100px 100px 10px;
-    &.active {
-      color: orangered;
-    }
-    & p {
-      margin: 5px;
-    }
-    .context {
-      padding: 5px;
-      position: relative;
-      margin: 0px;
-      font-weight: bold;
-      &::after {
-        content: '.';
-        position: absolute;
-        top: -8px;
-        left: 5.5px;
-        font-weight: bold;
-      }
-      &:hover {
-        cursor: pointer;
-        background-color: #eee;
-      }
-    }
-  }
   .pagination {
     &__item {
       padding: 0 5px;

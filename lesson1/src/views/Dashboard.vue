@@ -1,13 +1,17 @@
 <template>
   <div>
-    <header>
-      <div class="header">
-        <h1>Мои личные расходы:</h1>
-        <h3>Итого: {{ paymentsListTotalAmount }} $</h3>
-        <h3>Всего статей расхода: {{ paymentsListTotalQuantity }} шт.</h3>
-        <h3>Всего категорий: {{ categoryListTotalAmount }} шт.</h3>
-      </div>
-    </header>
+    <v-container>
+      <v-row>
+        <v-col cols=6>
+          <div class="header">
+            <h1>Мои личные расходы:</h1>
+            <h3>Итого: {{ paymentsListTotalAmount }} $</h3>
+            <h3>Всего статей расхода: {{ paymentsListTotalQuantity }} шт.</h3>
+            <h3>Всего категорий: {{ categoryListTotalAmount }} шт.</h3>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
     <main class="main">
       <my-button-comp
         @click-add-payment="addPayment"
@@ -95,7 +99,7 @@ export default {
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: flex-start;
+  justify-content: center;
+  // align-items: center;
 }
 </style>

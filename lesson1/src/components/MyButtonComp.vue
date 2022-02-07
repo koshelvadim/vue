@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <div class="my_button">
-      <button
-        class="button button__add"
+  <div class="menu__button">
+      <v-btn
         @click="$emit('click-add-payment')">
         Add new cost +
-      </button>
-      <button
-        class="button button__add"
+      </v-btn>
+      <v-btn
         @click="$emit('click-add-category')">
         Add new category +
-      </button>
-    </div>
+      </v-btn>
     <div class="my_button">
       <h5>Сколько отобразить статей на странице: </h5>
       <input
@@ -37,34 +33,9 @@ export default {
 </script>
 
 <style lang="scss">
-.my_button{
-  width: 372px;
-  height: 30px;
-  padding: 5px 0;
-
+.menu__button {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  & input {
-    height: 20px;
-    width: 40px;
-  }
 }
-.button{
-  padding: 5px 20px;
-  margin: 10px 0px;
-  font-size: 12px;
-  background-color: lightblue;
-
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  &__add{
-      color: black;
-  }
-  &:hover{
-      background-color: darken(lightblue, 40%);
-      color: white;
-  }
- }
 </style>

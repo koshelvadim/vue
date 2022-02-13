@@ -1,7 +1,7 @@
 export default {
   state: {
     paymentsList: [],
-    size: 5,
+    currentList: [],
   },
   mutations: {
     SET_PAYMENTS_LIST(state, paymentsList) {
@@ -9,9 +9,6 @@ export default {
     },
     ADD_PAYMETN_DATA(state, payment) {
       state.paymentsList.push(payment);
-    },
-    CHANGE_INPUT_VALUE(state, value) {
-      state.size = value;
     },
     DELETE_PAYMENT_DATA(state, payment) {
       state.paymentsList.forEach((element, index) => {
@@ -21,17 +18,10 @@ export default {
       });
     },
     EDIT_PAYMENT_DATA(state, payment) {
-      console.log(payment);
       state.paymentsList.forEach((element, index) => {
         if (element.id === payment.id) {
           state.paymentsList.splice(index, 1, payment);
         }
-      });
-    },
-    CLEAR_CLASS_ACTIVE() {
-      const payItems = document.querySelectorAll('.payments__item');
-      payItems.forEach((el) => {
-        el.classList.remove('active');
       });
     },
   },
@@ -40,7 +30,6 @@ export default {
     paymentsListTotalAmount: ({ paymentsList }) => paymentsList
       .reduce((total, { value }) => total + value, 0),
     paymentsListTotalQuantity: ({ paymentsList }) => paymentsList.length,
-    size: (state) => state.size,
   },
   actions: {
     fetchData({ commit }) {
@@ -94,10 +83,69 @@ export default {
             category: 'Transport',
             value: 360,
           },
+          {
+            id: '9',
+            date: '12.01.2022',
+            category: 'Food',
+            value: 160,
+          },
+          {
+            id: '10',
+            date: '08.01.2022',
+            category: 'Sale',
+            value: 169,
+          },
+          {
+            id: '11',
+            date: '10.01.2022',
+            category: 'Transport',
+            value: 360,
+          },
+          {
+            id: '12',
+            date: '14.01.2022',
+            category: 'Food',
+            value: 532,
+          },
+          {
+            id: '13',
+            date: '16.01.2022',
+            category: 'Music',
+            value: 189,
+          },
+          {
+            id: '14',
+            date: '18.01.2022',
+            category: 'Airbuss',
+            value: 760,
+          },
+          {
+            id: '15',
+            date: '20.01.2022',
+            category: 'Restaurant',
+            value: 332,
+          },
+          {
+            id: '16',
+            date: '08.01.2022',
+            category: 'Sale',
+            value: 169,
+          },
+          {
+            id: '17',
+            date: '10.01.2022',
+            category: 'Transport',
+            value: 360,
+          },
+          {
+            id: '18',
+            date: '12.01.2022',
+            category: 'Food',
+            value: 160,
+          },
         ];
-
         commit('SET_PAYMENTS_LIST', paymentsList);
-      }, 500);
+      }, 2000);
     },
   },
 };

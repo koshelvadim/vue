@@ -16,12 +16,12 @@ const router = new VueRouter({
       // component: Dashboard,
       component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
     },
-    {
-      path: '/dashboard/:type',
-      name: 'dashboard',
-      // component: Dashboard,
-      component: () => import(/* webpackChunkName: "dashboardPage" */ '@/views/Dashboard.vue'),
-    },
+    // {
+    //   path: '/dashboard/:type',
+    //   name: 'dashboard',
+    //   // component: Dashboard,
+    //   component: () => import(/* webpackChunkName: "dashboardPage" */ '@/views/Dashboard.vue'),
+    // },
     {
       path: '/about*',
       name: 'about',
@@ -40,8 +40,8 @@ const router = new VueRouter({
       component: () => import(/* webpackChunkName: "404" */ '@/views/Notfound.vue'),
     },
     {
-      path: '/calc',
-      name: 'calc',
+      path: '/calculator',
+      name: 'calculator',
       // component: Calc,
       component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Calc.vue'),
     },

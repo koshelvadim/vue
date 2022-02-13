@@ -2,22 +2,29 @@
   <div>
     <v-container>
       <v-row>
-        <v-col>
-          <div class="header">
-            <h1>Мои личные расходы:</h1>
-            <h3>Итого: {{ paymentsListTotalAmount }} $</h3>
-            <h3>Всего статей расхода: {{ paymentsListTotalQuantity }} шт.</h3>
-            <h3>Всего категорий: {{ categoryListTotalAmount }} шт.</h3>
-          </div>
+        <v-col md="6" py-5>
+            <p class="text-h5 text-sm-h3 font-weight-bold">
+              Мои платежи:
+            </p>
+            <p class="text-h6 text-sm-h4 font-weight-medium">
+              Итого: {{ paymentsListTotalAmount }} $
+            </p>
+            <p class="text-h6 text-sm-h4 font-weight-medium">
+              Всего статей расхода: {{ paymentsListTotalQuantity }} шт.
+            </p>
+            <p class="text-h6 text-sm-h4 font-weight-medium">
+              Всего категорий: {{ categoryListTotalAmount }} шт.
+            </p>
         </v-col>
       </v-row>
       <main class="main">
-      <my-button-comp
-        @click-add-payment="addPayment"
-        @click-add-category="addCategory"
-        @change-size="changeSize"/>
-      <payments-display-comp
-        :paymentsList="paymentsList"/>
+        <v-row>
+          <v-col md="6" class="d-flex">
+            <add-payment-form-comp/>
+            <add-category-comp/>
+          </v-col>
+        </v-row>
+      <payments-display-comp/>
     </main>
     </v-container>
   </div>
@@ -27,46 +34,26 @@
 import { mapMutations, mapActions, mapGetters } from 'vuex';
 
 import PaymentsDisplayComp from '@/components/PaymentsDisplayComp.vue';
-import MyButtonComp from '@/components/MyButtonComp.vue';
+import AddPaymentFormComp from '@/components/AddPaymentFormComp.vue';
+import AddCategoryComp from '@/components/AddCategoryComp.vue';
 
 export default {
   name: 'DashboardPage',
   components: {
     PaymentsDisplayComp,
-    MyButtonComp,
+    AddPaymentFormComp,
+    AddCategoryComp,
   },
   data: () => ({}),
   methods: {
     ...mapMutations([
       'ADD_PAYMETN_DATA',
       'ADD_CATEGORY_DATA',
-      'CHANGE_INPUT_VALUE',
-      'CLEAR_CLASS_ACTIVE',
     ]),
     ...mapActions([
       'fetchData',
       'fetchCategoryList',
     ]),
-
-    addPayment() {
-      this.CLEAR_CLASS_ACTIVE();
-      this.$contextmenu.hide();
-      this.$modal.show({
-        title: 'Add new payment',
-        content: 'addPaymentFormComp',
-      });
-    },
-    addCategory() {
-      this.CLEAR_CLASS_ACTIVE();
-      this.$contextmenu.hide();
-      this.$modal.show({
-        title: 'Add new category',
-        content: 'addCategoryComp',
-      });
-    },
-    changeSize(value) {
-      this.CHANGE_INPUT_VALUE(value);
-    },
   },
   computed: {
     ...mapGetters([
@@ -78,12 +65,8 @@ export default {
     ]),
   },
   mounted() {
-    // console.log(this.$store);
     this.fetchData();
     this.fetchCategoryList();
-    // this.$modal.show({});
-    // this.$modal.hide();
-    // this.$contextmenu.trigger({});
   },
 };
 </script>

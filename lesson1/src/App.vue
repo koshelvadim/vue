@@ -4,7 +4,6 @@
     <header-comp/>
 
     <v-main>
-      <bread-crumbs-comp/>
 
       <router-view/>
 
@@ -15,10 +14,9 @@
 
 <script>
 import HeaderComp from './components/HeaderComp.vue';
-import BreadCrumbsComp from './components/BreadCrumbsComp.vue';
 
 export default {
-  components: { HeaderComp, BreadCrumbsComp },
+  components: { HeaderComp },
   name: 'App',
 
   data: () => ({

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>{{ name }}</h1>
-    <div class="num">
+  <v-container>
+    <h2>{{ name }}</h2>
+    <div :class="[$style.num]">
       <input
         :class="{ 'border' : check === 'one' }"
         type="number"
@@ -16,38 +16,38 @@
         max="999">
       <span>= {{ result }}</span>
     </div>
-    <div class="error" v-show="error">
+    <div :class="[$style.error]" v-show="error">
       Ошибка: {{ error }}
     </div>
-    <div class="operation">
-      <button
+    <div :class="[$style.operation]">
+      <v-btn
         v-for="operator in operators"
         @click="calculate(operator)"
         :title="operator"
         :disabled="op1 === '' || op2 === ''"
         :key="operator">{{operator}}
-      </button>
+      </v-btn>
     </div>
-    <div class="checkbox">
+    <div :class="[$style.checkbox]">
       <input type="checkbox" id="show" v-model="show">
       <label for="show">Показать клавиатуру</label>
     </div>
-    <div class="keyboard" v-show="show">
-      <button
+    <div :class="[$style.keyboard]" v-show="show">
+      <v-btn
         v-for="button in buttons"
         @click="getValue(button, check)"
         :key="button"
         >{{ button }}
-      </button>
-      <button @click="delNum(check, op1, op2)">DEL</button>
+      </v-btn>
+      <v-btn @click="delNum(check, op1, op2)">DEL</v-btn>
     </div>
-    <div class="radio">
+    <div :class="[$style.radio]">
       <input type="radio" id="one" value="one" name="toggle" checked v-model="check">
       <label for="one">Первое поле</label>
       <input type="radio" id="two" value="two" name="toggle" v-model="check">
       <label for="two">Второе поле</label>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -144,35 +144,35 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-h1 {
-  color: black;
-}
+<style module lang="scss">
 .num {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
     & input {
-    width: 100px;
+    width: 60px;
     margin-right: 10px;
 
-    font-size: 34px;
+    font-size: 24px;
     &.border {
       outline: none;
       border: 2px solid red;
     }
   }
     & span{
-      font-size: 40px;
+      font-size: 24px;
     }
 }
 .operation {
+  max-width: 300px;
   padding: 10px;
   & button{
-    font-size: 34px;
+    font-size: 24px;
     margin-right: 10px;
   }
 }
 .keyboard {
+  max-width: 350px;
+  padding: 10px;
   margin: 10px 0;
   & button{
     font-size: 20px;
